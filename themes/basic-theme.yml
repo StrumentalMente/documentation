@@ -1,0 +1,44 @@
+extends: default
+role:
+  red:
+    font-color: ff0000
+  green:
+    font-color: 00ff00
+  blue:
+    font-color: 0000ff
+
+base:
+  font-family: Raleway
+heading:
+  font-family: Montserrat
+
+title-page:
+  font-color: ffffff
+  title:
+    font-color: ffffff
+    font-family: Montserrat
+    font-style: bold
+  subtitle:
+    font-family: Raleway
+    font-style: bold_italic
+    font-color: ffffff
+  authors:
+    font-color: ffffff
+  background-image: image::background.svg[]
+  logo:
+    top: 30%
+    image: image::https://strumentalmente.github.io/logo/1024x1024.png[pdfwidth=30%]
+
+font:
+  catalog:
+    merge: true
+    Montserrat:
+      normal: montserrat/montserrat-normal.ttf
+      italic: montserrat/montserrat-italic.ttf
+      bold: montserrat/montserrat-bold.ttf
+      bold_italic: montserrat/montserrat-bold_italic.ttf
+    Raleway:
+      normal: raleway/raleway-normal.ttf
+      italic: raleway/raleway-italic.ttf
+      bold: raleway/raleway-bold.ttf
+      bold_italic: raleway/raleway-bold_italic.ttf

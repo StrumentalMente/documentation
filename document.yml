@@ -1,0 +1,35 @@
+---
+title: 'StrumentalMente: Project Documentation'
+authors:
+- name: Andrea
+  surname: Esposito
+  email: esposito_andrea99@hotmail.com
+- name: Alessandro
+  surname: Annese
+- name: Davide
+  surname: De Salvo
+- name: Graziano
+  surname: Montanaro
+- name: Regina
+  surname: Zaccaria
+chapters:
+- title: Preface
+  part: false
+- title: License
+  part: false
+lang: en
+copyright:
+  fromYear: 2020
+  holder: FSC -- Five Students of Computer Science
+  text: >-
+    Permission is granted to copy, distribute and/or modify this document
+    under the terms of the GNU Free Documentation License, Version 1.3
+    or any later version published by the Free Software Foundation;
+    with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.
+    A copy of the license is included in the section entitled "`GNU
+    Free Documentation License`".
+  adptNotice: true
+options:
+  target: github
+  revhistory: false
+  revhistoryLabel: Revision History

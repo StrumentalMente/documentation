@@ -1,0 +1,8 @@
+[appendix]
+
+:old-sectnums: {sectnums}
+:!sectnums:
+
+include::../LICENSE.adoc[leveloffset+=1]
+
+:sectnums: {old-sectnums}
