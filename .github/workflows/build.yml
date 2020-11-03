@@ -41,6 +41,8 @@ jobs:
           cp -r docs/* gh-pages/
 
           cd gh-pages
+          mkdir legacy
+          echo "<html><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>StrumentalMente - LEGACY</title></head><body><h1>StrumentalMente - Documentazione</h1><p>Naviga la vecchia documentazione di StrumentalMente attraverso la <a href=\"https://github.com/strumentalmente/documentation/tree/master/legacy\">repository</a>." > ./legacy/index.html
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add .
