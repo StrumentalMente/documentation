@@ -1,0 +1,44 @@
+---
+title: 'StrumentalMente: Documentazione Completa'
+authors:
+- name: Andrea
+  surname: Esposito
+  email: a.esposito39@studenti.uniba.it
+- name: Alessandro
+  surname: Annese
+- name: Davide
+  surname: De Salvo
+- name: Graziano
+  surname: Montanaro
+- name: Regina
+  surname: Zaccaria
+chapters:
+- title: Pianificazione
+  part: true
+- title: Progettazione
+  part: true
+- title: Realizzazione
+  part: true
+- title: Test
+  part: true
+lang: it
+copyright:
+  fromYear: 2019
+  holder: FSC -- Five Students of Computer Science
+  text: |
+    Concesso in licenza secondo i termini della Licenza Apache, versione 2.0 (la
+    "`Licenza`"); è proibito usare questo file se non in conformità alla Licenza.
+    Una copia della Licenza è disponibile all'indirizzo:
+
+    [.text-center]
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Se non richiesto dalla legislazione vigente o concordato per iscritto, il
+    software distribuito nei termini della Licenza è distribuito "`così com'è`",
+    senza garanzie o condizioni di alcun tipo, esplicite o implicite. Consultare
+    la Licenza per il testo specifico che regola le autorizzazioni e le
+    limitazioni previste dalla medesima.
+  adpt_notice: true
+options:
+  target: github
+  revhistory: false

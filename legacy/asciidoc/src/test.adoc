@@ -1,0 +1,464 @@
+= Test
+
+== Alpha test (1)
+
+=== Il test
+
+.Esiti del primo alpha test
+[cols="^.^1,3*<.^2,^.^1",options="header",]
+|===
+|Codice |Descrizione |Previsto |Effettivo |Superato
+|T00 (a) |Click del bottone "`chiudi`" della _titlebar_ |Apertura del
+dialogo di conferma di chiusura dell'applicazione |Apertura del dialogo
+di conferma di chiusura dell'applicazione |Sì
+
+|T00 (b) |Click del bottone "`riduci`" della _titlebar_ |Riduzione della
+finestra dell'applicazione, rimozione del bottone e aggiunta del bottone
+"`massimizza`" |Riduzione della finestra dell'applicazione, rimozione del
+bottone e aggiunta del bottone "`massimizza`" |Sì
+
+|T00 (c) |Click del bottone "`massimizza`" della _titlebar_
+|Massimizzazione della finestra dell'applicazione, rimozione del bottone
+e aggiunta del bottone "`riduci`" |Massimizzazione della finestra
+dell'applicazione, rimozione del bottone e aggiunta del bottone "`riduci`"
+|Sì
+
+|T00 (d) |Click del bottone "`riduci a icona`" della _titlebar_ |Riduzione
+a icona dell'applicazione |Riduzione a icona dell'applicazione |Sì
+
+|T01 |Click del bottone "`Inizia`" |Apertura e visualizzazione della
+pagina home |Apertura e visualizzazione della pagina home |Sì
+
+|T02 |Utilizzo della _shortcut_ "`_Enter_`" nella _landing page_ |Apertura
+e visualizzazione della pagina home |Apertura e visualizzazione della
+pagina home |Sì
+
+|T03 |Click del bottone "`Home`" |Apertura e visualizzazione della pagina
+home |Apertura e visualizzazione della pagina home |Sì
+
+|T04 |Click del bottone "`Profilo`" |Apertura e visualizzazione della
+pagina del profilo |Apertura e visualizzazione della pagina del profilo
+|Sì
+
+|T05 |Click del bottone "`Teoria Musicale`" |Apertura e visualizzazione
+dell'indice della teoria |Apertura e visualizzazione dell'indice della
+teoria |Sì
+
+|T06 |Click del bottone "`Teoria Strumenti`" |Apertura e visualizzazione
+della lista di strumenti (per la teoria) disponibili |Apertura e
+visualizzazione della lista di strumenti (per la teoria) disponibili |Sì
+
+|T07 |Click del bottone "`Accordi`" |Apertura e visualizzazione della
+lista di strumenti (per gli accordi) disponibili |Apertura e
+visualizzazione della lista di strumenti (per gli accordi) disponibili
+|Sì
+
+|T08 |Click del bottone "`Mappa`" |Apertura e visualizzazione della
+finestra pop-up della mappa |Apertura e visualizzazione della finestra
+pop-up della mappa |Sì
+
+|T09 |Click del bottone "`Aiuto`" |Apertura e visualizzazione della
+finestra pop-up relativo alla sezione in cui ci si trova |Apertura e
+visualizzazione della finestra pop-up relativo alla sezione in cui ci si
+trova |Sì
+
+|T10 |Click del bottone "`Informazioni`" |Apertura e visualizzazione della
+finestra pop-up di informazioni sul sistema |Apertura e visualizzazione
+della finestra pop-up di informazioni sul sistema |Sì
+
+|T11 |Click del bottone "`Esci`" |Apertura del dialogo di conferma di
+uscita dal sistema |Apertura del dialogo di conferma di uscita dal
+sistema |Sì
+
+|T11.1 |Click del bottone "`Sì`" nel dialogo di conferma di uscita |Uscita
+dal sistema e chiusura di quest'ultimo |Uscita dal sistema e chiusura di
+quest'ultimo |Sì
+
+|T11.2 |Click del bottone "`No`" nel dialogo di conferma di uscita
+|Chiusura del dialogo di conferma e ritorno al sistema |Chiusura del
+dialogo di conferma e ritorno al sistema |Sì
+
+|T12 |Click del titolo di un quiz nella pagina "`Profilo`" |Apertura del
+rispettivo quiz |Apertura del rispettivo quiz |Sì
+
+|T13 |Click del bottone "`Reset del profilo`" nella pagina del profilo
+|Reset dei risultati dei quiz a "`non svolti`". |Reset dei risultati dei
+quiz a "`non svolti`". |Sì
+
+|T14 |Modifica dell'username nella pagina del profilo |Modifica e
+salvataggio dell'username dell'utente |Modifica e salvataggio
+dell'username dell'utente |Sì
+
+|T15 |Click della macroarea da visitare in un indice degli argomenti
+|Apertura del sottoindice della macroarea scelta |Apertura del
+sottoindice della macroarea scelta |Sì
+
+|T16 |Click di un argomento in un indice |Apertura del relativo
+argomento (o quiz) |Apertura del relativo argomento (o quiz) |Sì
+
+|T17 |Utilizzo del bottone "`Avanti`" |Cambio della slide mostrata (o
+dell'argomento se è l'ultima slide) |Cambio della slide mostrata (o
+dell'argomento se è l'ultima slide) |Sì
+
+|T17.1 |Utilizzo del bottone "`Avanti`" nell'ultima slide nell'ultimo
+argomento di una sezione |Apertura del quiz relativo alla sezione scelta
+|Apertura del quiz relativo alla sezione scelta |Sì
+
+|T18 |Utilizzo del bottone "`Indietro`" |Cambio della slide mostrata (o
+dell'argomento se è l'ultima slide) |Cambio della slide mostrata (o
+dell'argomento se è l'ultima slide) |Sì
+
+|T19 |Utilizzo delle shortcut "`freccia avanti” e “freccia indietro`"
+|Simulazione del click del bottone "`Avanti” o “Indietro`"
+(rispettivamente) |Simulazione del click del bottone "`Avanti`" o
+"`Indietro`" (rispettivamente) |Sì
+
+|T20 |Apertura di una sezione per cui si è completato il quiz
+propedeutico |Apertura della sezione scelta |Apertura della sezione
+scelta |Sì
+
+|T20.1 |Apertura di una sezione per cui non si è completato il quiz
+propedeutico |Apertura di un dialogo di avviso e conferma della scelta
+|Apertura di un dialogo di avviso e conferma della scelta |Sì
+
+|T20.1.1 |Click del bottone "`Sì`" |Chiusura del dialogo e apertura della
+sezione |Chiusura del dialogo e apertura della sezione |Sì
+
+|T20.1.2 |Click del bottone "`No`" |Chiusura del dialogo |Chiusura del
+dialogo |Sì
+
+|T21 |Click dei bottoni di navigazione ("`X° Domanda`") nella _sidebar_
+dei quiz |Apertura della domanda scelta |Apertura della domanda scelta
+|Sì
+
+|T22 |Click del bottone "`Aiuto`" nei quiz |Apertura della pagina di aiuto
+relativa ai quiz |Apertura della pagina di aiuto relativa ai quiz |Sì
+
+|T23 |Click del bottone "`Torna alla teoria`" nei quiz |Ritorno alla home
+della sezione di teoria a cui il quiz si riferisce |Ritorno alla home
+della sezione di teoria a cui il quiz si riferisce |Sì
+
+|T24 |Click del bottone "`Esci dall'applicazione`" nei quiz |Apertura del
+dialogo di conferma di uscita dal sistema |Apertura del dialogo di
+conferma di uscita dal sistema a|
+Sì
+
+(si vedano T11, T11.1 e T11.2)
+
+|T25 |Click del bottone "`Avanti” o “Indietro`" nei quiz |Variazione della
+domanda mostrata con la successiva o la precedente (rispettivamente)
+|Variazione della domanda mostrata con la successiva o la precedente
+(rispettivamente) |Sì
+
+|T25.1 |Click del bottone "`Indietro`" nella prima domanda |Simulazione
+del click del bottone "`Torna alla teoria`" (T23) |Simulazione del click
+del bottone "`Torna alla teoria`" (T23) |Sì
+
+|T26 |Click del bottone "`Verifica`" alla fine di un quiz |Visualizzazione
+di un messaggio contenente il risultato ottenuto |Visualizzazione di un
+messaggio contenente il risultato ottenuto |Sì
+
+|T26.1 |Click del bottone "`Ok`" |Chiusura del messaggio di dialogo e
+ritorno alla home della sezione scelta |Chiusura del messaggio di
+dialogo e ritorno alla home della sezione scelta |Sì
+
+|T26.2 |Click del bottone "`Verifica`" |Apertura della correzione dei quiz
+|Apertura della correzione dei quiz |Sì
+
+|T26.2.1 |Click del bottone "`Esci`" alla fine della correzione |Ritorno
+alla home della sezione scelta |Ritorno alla home della sezione scelta
+|Sì
+
+|T27 |Click del bottone "`Indice`" all'interno di un argomento |Apertura
+dell'indice della relativa sezione |Apertura dell'indice della relativa
+sezione |Sì
+|===
+
+=== I risultati
+
+Durante la fase di alpha test non si sono riscontrati gravi errori, in
+quanto la maggior parte di essi sono stati risolti in contemporanea alla
+stesura stessa del codice sorgente dell'applicazione.
+
+Le modifiche apportate in seguito alla chiusura della fase di _alpha
+test_ sono state modifiche di carattere meramente tipografico e/o
+grafico, per questo motivo risulta superflua una ripetizione del test.
+
+Tuttavia, si sono presentati diversi problemi sul lato della
+responsività dell'applicazione. Per questo motivo il team ha deciso di
+ristrutturare il codice sorgente dell'applicazione in modo da rendere
+più reattivo il sistema. Una tracciabilità dettagliata delle modifiche
+apportate è disponibile su GitHub, nella repository di StrumentalMente
+(https://github.com/F-S-C/StrumentalMente), più precisamente nella _Pull
+Request_ numero 12 (https://github.com/F-S-C/StrumentalMente/pull/12). A
+seguito della chiusura di quest'ultima, si è provveduto a testare
+nuovamente l'applicazione.
+
+== Alpha test (2)
+
+=== Il test 
+
+.Esiti del secondo alpha test
+[cols="^.^1,3*<.^2,^.^1",options="header",]
+|===
+|Codice |Descrizione |Previsto |Effettivo |Superato
+|T00 (a) |Click del bottone "`chiudi`" della _titlebar_ |Apertura del
+dialogo di conferma di chiusura dell'applicazione |Apertura del dialogo
+di conferma di chiusura dell'applicazione |Sì
+
+|T00 (b) |Click del bottone "`riduci`" della _titlebar_ |Riduzione della
+finestra dell'applicazione, rimozione del bottone e aggiunta del bottone
+"`massimizza`" |Riduzione della finestra dell'applicazione, rimozione del
+bottone e aggiunta del bottone "`massimizza`" |Sì
+
+|T00 (c) |Click del bottone "`massimizza`" della _titlebar_
+|Massimizzazione della finestra dell'applicazione, rimozione del bottone
+e aggiunta del bottone "`riduci`" |Massimizzazione della finestra
+dell'applicazione, rimozione del bottone e aggiunta del bottone "`riduci`"
+|Sì
+
+|T00 (d) |Click del bottone "`riduci a icona`" della _titlebar_ |Riduzione
+a icona dell'applicazione |Riduzione a icona dell'applicazione |Sì
+
+|T01 |Click del bottone "`Inizia`" |Apertura e visualizzazione della
+pagina home |Apertura e visualizzazione della pagina home |Sì
+
+|T02 |Utilizzo della _shortcut_ "`_Enter_`" nella _landing page_ |Apertura
+e visualizzazione della pagina home |Apertura e visualizzazione della
+pagina home |Sì
+
+|T03 |Click del bottone "`Home`" |Apertura e visualizzazione della pagina
+home |Apertura e visualizzazione della pagina home |Sì
+
+|T04 |Click del bottone "`Profilo`" |Apertura e visualizzazione della
+pagina del profilo |Apertura e visualizzazione della pagina del profilo
+|Sì
+
+|T05 |Click del bottone "`Teoria Musicale`" |Apertura e visualizzazione
+dell'indice della teoria |Apertura e visualizzazione dell'indice della
+teoria |Sì
+
+|T06 |Click del bottone "`Teoria Strumenti`" |Apertura e visualizzazione
+della lista di strumenti (per la teoria) disponibili |Apertura e
+visualizzazione della lista di strumenti (per la teoria) disponibili |Sì
+
+|T07 |Click del bottone "`Accordi`" |Apertura e visualizzazione della
+lista di strumenti (per gli accordi) disponibili |Apertura e
+visualizzazione della lista di strumenti (per gli accordi) disponibili
+|Sì
+
+|T08 |Click del bottone "`Mappa`" |Apertura e visualizzazione della
+finestra pop-up della mappa |Apertura e visualizzazione della finestra
+pop-up della mappa |Sì
+
+|T09 |Click del bottone "`Aiuto`" |Apertura e visualizzazione della
+finestra pop-up relativo alla sezione in cui ci si trova |Apertura e
+visualizzazione della finestra pop-up relativo alla sezione in cui ci si
+trova |Sì
+
+|T10 |Click del bottone "`Informazioni`" |Apertura e visualizzazione della
+finestra pop-up di informazioni sul sistema |Apertura e visualizzazione
+della finestra pop-up di informazioni sul sistema |Sì
+
+|T11 |Click del bottone "`Esci`" |Apertura del dialogo di conferma di
+uscita dal sistema |Apertura del dialogo di conferma di uscita dal
+sistema |Sì
+
+|T11.1 |Click del bottone "`Sì`" nel dialogo di conferma di uscita |Uscita
+dal sistema e chiusura di quest'ultimo |Uscita dal sistema e chiusura di
+quest'ultimo |Sì
+
+|T11.2 |Click del bottone "`No`" nel dialogo di conferma di uscita
+|Chiusura del dialogo di conferma e ritorno al sistema |Chiusura del
+dialogo di conferma e ritorno al sistema |Sì
+
+|T12 |Click del titolo di un quiz nella pagina "`Profilo`" |Apertura del
+rispettivo quiz |Apertura del rispettivo quiz |Sì
+
+|T13 |Click del bottone "`Reset del profilo`" nella pagina del profilo
+|Reset dei risultati dei quiz a "`non svolti`". |Reset dei risultati dei
+quiz a "`non svolti`". |Sì
+
+|T14 |Modifica dell'username nella pagina del profilo |Modifica e
+salvataggio dell'username dell'utente |Modifica e salvataggio
+dell'username dell'utente |Sì
+
+|T15 |Click della macroarea da visitare in un indice degli argomenti
+|Apertura del sottoindice della macroarea scelta |Apertura del
+sottoindice della macroarea scelta |Sì
+
+|T16 |Click di un argomento in un indice |Apertura del relativo
+argomento |Apertura del relativo argomento |Sì
+
+|T17 |Utilizzo del bottone "`Avanti`" |Cambio della slide mostrata (o
+dell'argomento se è l'ultima slide) |Cambio della slide mostrata (o
+dell'argomento se è l'ultima slide) |Sì
+
+|T17.1 |Utilizzo del bottone "`Avanti`" nell'ultima slide nell'ultimo
+argomento di una sezione |Apertura del quiz relativo alla sezione scelta
+|Apertura del quiz relativo alla sezione scelta |Sì
+
+|T18 |Utilizzo del bottone "`Indietro`" |Cambio della slide mostrata (o
+dell'argomento se è l'ultima slide) |Cambio della slide mostrata (o
+dell'argomento se è l'ultima slide) |Sì
+
+|T19 |Utilizzo delle shortcut "`freccia avanti” e “freccia indietro`"
+|Simulazione del click del bottone "`Avanti” o “Indietro`"
+(rispettivamente) |Simulazione del click del bottone "`Avanti`" o
+"`Indietro`" (rispettivamente) |Sì
+
+|T20 |Apertura di una sezione per cui si è completato il quiz
+propedeutico |Apertura della sezione scelta |Apertura della sezione
+scelta |Sì
+
+|T20.1 |Apertura di una sezione per cui non si è completato il quiz
+propedeutico |Apertura di un dialogo di avviso e conferma della scelta
+|Apertura di un dialogo di avviso e conferma della scelta |Sì
+
+|T20.1.1 |Click del bottone "`Sì`" |Chiusura del dialogo e apertura della
+sezione |Chiusura del dialogo e apertura della sezione |Sì
+
+|T20.1.2 |Click del bottone "`No`" |Chiusura del dialogo |Chiusura del
+dialogo |Sì
+
+|T21 |Click dei bottoni di navigazione ("`X° Domanda`") nella _sidebar_
+dei quiz |Apertura della domanda scelta |Apertura della domanda scelta
+|Sì
+
+|T22 |Click del bottone "`Aiuto`" nei quiz |Apertura della pagina di aiuto
+relativa ai quiz |Apertura della pagina di aiuto relativa ai quiz |Sì
+
+|T23 |Click del bottone "`Torna alla teoria`" nei quiz |Ritorno alla home
+della sezione di teoria a cui il quiz si riferisce |Ritorno alla home
+della sezione di teoria a cui il quiz si riferisce |Sì
+
+|T24 |Click del bottone "`Esci dall'applicazione`" nei quiz |Apertura del
+dialogo di conferma di uscita dal sistema |Apertura del dialogo di
+conferma di uscita dal sistema a|
+Sì
+
+(si vedano T11, T11.1 e T11.2)
+
+|T25 |Click del bottone "`Avanti” o “Indietro`" nei quiz |Variazione della
+domanda mostrata con la successiva o la precedente (rispettivamente)
+|Variazione della domanda mostrata con la successiva o la precedente
+(rispettivamente) |Sì
+
+|T25.1 |Click del bottone "`Indietro`" nella prima domanda |Simulazione
+del click del bottone "`Torna alla teoria`" (T23) |Simulazione del click
+del bottone "`Torna alla teoria`" (T23) |Sì
+
+|T26 |Click del bottone "`Verifica`" alla fine di un quiz |Visualizzazione
+di un messaggio contenente il risultato ottenuto |Visualizzazione di un
+messaggio contenente il risultato ottenuto |Sì
+
+|T26.1 |Click del bottone "`Ok`" |Chiusura del messaggio di dialogo e
+ritorno alla home della sezione scelta |Chiusura del messaggio di
+dialogo e ritorno alla home della sezione scelta |Sì
+
+|T26.2 |Click del bottone "`Verifica`" |Apertura della correzione dei quiz
+|Apertura della correzione dei quiz |Sì
+
+|T26.2.1 |Click del bottone "`Esci`" alla fine della correzione |Ritorno
+alla home della sezione scelta |Ritorno alla home della sezione scelta
+|Sì
+
+|T27 |Click del bottone "`Indice`" all'interno di un argomento |Apertura
+dell'indice della relativa sezione |Apertura dell'indice della relativa
+sezione |Sì
+|===
+
+=== I risultati
+
+Come previsto, poiché le modifiche maggiori sono state apportate solo
+alla struttura del codice e le singole funzioni hanno ricevuto delle
+modifiche relativamente piccole, l'alpha test è stato superato senza
+troppe difficoltà in tutti i requisiti.
+
+== Beta test (1)
+
+=== Il test
+
+Sono stati coinvolti 35 _beta tester_ che, dopo aver provato liberamente
+l'applicazione, hanno risposto a un breve questionario di gradimento di
+cui sono riportati i risultati.
+
+=== I risultati
+
+[cols=",",options="header",]
+|===
+| |[.chart]#[CHART]#
+|[.chart]#[CHART]# |[.chart]#[CHART]#
+|===
+
+==== Le risposte al questionario
+
+===== Navigazione
+
+====== Quanto è facile navigare nella nostra applicazione?
+
+[.chart]#[CHART]#
+
+====== Quanto è stato facile trovare le informazioni che stavi cercando?
+
+[.chart]#[CHART]#
+
+===== Contenuti
+
+====== Quanto chiare sono le informazioni disponibili?
+
+[.chart]#[CHART]#
+
+====== Quanto aggiornato è il contenuto del sito?
+
+[.chart]#[CHART]#
+
+===== Apparenza
+
+====== Quanto è attraente la nostra applicazione?
+
+[.chart]#[CHART]#
+
+===== Soddisfazione
+
+====== Quanto sei soddisfatto dell'applicazione?
+
+[.chart]#[CHART]#
+
+====== Raccomanderesti l'applicazione ad altri?
+
+[.chart]#[CHART]#
+
+==== Conclusioni
+
+Non sono risultati errori gravi all'interno dell'applicazione durante il
+test, se non legati a preferenze personali di singoli utenti.
+
+Tuttavia, si sono accolti i commenti ricevuti e si è migliorata la
+navigabilità dell'applicazione aggiungendo nuove _shortcut_ e un _link_
+ai _quiz_ all'interno degli indici delle relative sezioni. Tali
+modifiche non sono però radicali e non richiedono quindi la ripetizione
+della fase di beta test (né quella di alpha test, in quanto sono state
+testate in fase di integrazione e non sono state modificate altre
+porzioni del sistema).
+
+Si sono inoltre effettuati ulteriori miglioramenti di carattere
+tipografico e/o grafico che, come nella fase precedente, non richiedono
+un'ulteriore fase di test.
+
+Inoltre, si sono ritoccati i contenuti per accogliere alcuni commenti
+ricevuti e sono state effettuate le seguenti modifiche:
+
+. Modifica del comportamento del tasto "`Indietro`" nella prima slide di
+ogni sezione
+. Aggiunta di un collegamento ai quiz all'interno degli indici
+. Modifiche del comportamento del bottone "`Esci`" alla chiusura di un
+quiz per tornare alla teoria della sezione a cui il quiz fa riferimento
+. Modifiche del comportamento del bottone "`Ok`" della finestra di dialogo
+contenente i risultati del quiz per raggiungere la sezione successiva a
+quella a cui il quiz fa riferimento.
+
+Come già detto, non è necessario effettuare un ulteriore fase di alpha
+test, in quanto le modifiche apportate sono state verificate durante
+l'implementazione e non sono tanto grandi da sconvolgere la struttura
+stessa del sistema.

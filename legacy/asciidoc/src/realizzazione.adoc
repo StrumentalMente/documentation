@@ -1,0 +1,768 @@
+= Realizzazione
+
+== Le tecnologie utilizzate
+
+=== I linguaggi
+
+Il sistema StrumentalMente è scritto utilizzando l'*HTML5* (il che porta
+all'utilizzo del *CSS3* per definire le varie regole di stile) e il
+*JavaScript* (con la presenza di pochi file scritti in _TypeScript_, un
+dialetto del JavaScript e l'uso di alcune funzioni _JQuery_). L'intera
+applicazione è basata su _Node.js_, principalmente per il pacchetto
+*Electron*, che consente di utilizzare i precedenti linguaggi, in
+combinazione con il motore di rendering _Chromium_, per creare delle
+applicazioni _desktop_.
+
+=== Il codice
+
+Il codice sorgente di StrumentalMente è fondamentalmente suddiviso in
+tre file principali (escludendo i file HTML e CSS utilizzati per creare
+l'aspetto grafico dell'aplicazione). Tali file sono:
+
+`app.ts`::
+  È il file principale dell'applicazione. Contiene il processo
+  principale ("`_main process_`") di Electron e gestisce, quindi, tutti
+  gli eventi principali di StrumentalMente, tra cui:
+  +
+  * L'apertura dell'applicazione e il _rendering_ della prima finestra
+  * La chiusura dell'applicazione e le relative peculiarità di alcuni sistemi operativi (si pensi alla possibilità di ricreare la finestra appena chiusa su MacOS)
+  * L'apertura di finestre di dialogo
+  * L'apertura di finestra secondarie
+
+  Esegue i suoi compiti utilizzando la classe `Main` definita nel file `StrumentalMente.ts`.
+
+`StrumentalMente.ts`::
+  Contiene la definizione della classe principale che gestisce gli
+  eventi del _main process_ di Electron.
+`render.js`::
+  È il file principale del _rendering_ dell'applicazione. Contiene tutte
+  le funzioni da eseguire nel "`_rendering process_`" (processo di
+  _rendering_) di Electron.
+`main.js`::
+  Contiene tutte le funzioni che servono a dare dinamicità alle pagine
+  HTML dell'applicazione.
+
+`quiz.js`
+
+`chord-module.js`::
+  Questo modulo contiene le definizioni basilari utilizzati dai moduli
+  inerenti gli accordi.
+`accord``i_basso``.js`::
+  Contiene il comportamento dei quiz sugli accordi di basso.
+`accordi_chitarra.js`::
+  Contiene il comportamento dei quiz sugli accordi di chitarra.
+`accordi_piano.js`::
+  Contiene il comportamento dei quiz sugli accordi di pianoforte.
+`modal-dialog-module.js`::
+  Questo modulo contiene la definizione del comportamento delle finestre
+  di dialogo.
+`vendor/jquery.maphilight.js`::
+  Un modulo non sviluppato dal team. Permette di evidenziare le aree di
+  una mappa interattiva (tag <map> dell'HTML). Il file è scritto in
+  JQuery ed è stato lievemente modificato dal membro del team Andrea
+  Esposito.
+
+[[avviare-dal-codice-sorgente-1]]
+== Avviare dal codice sorgente
+
+Affinchè si possa avviare StrumentalMente dal codice sorgente è
+necessario che siano installati `Node.js` e `yarn`. Successivamente, è
+necessario installare le dipendenze del progetto, eseguendo il seguente
+comando nella _directory_ in cui è situato il codice sorgente (cartella
+`src``/` della _repository_):
+
+....
+yarn install
+....
+
+Dopo aver installato tutte le dipendenze, è possibile avviare
+l'applicazione utilizzando il comando seguente all'interno della
+_directory_ del codice sorgente:
+
+....
+yarn start
+....
+
+=== Il Makefile
+
+Per comodità, si è creato un `Makefile` per eseguire facilmente tutte le
+operazioni sul codice. Il comando `make` è da eseguire all'interno della
+_directory_ principale della _repository_.
+
+Il file `Makefile` contiene le seguenti regole:
+
+`(all)`::
+  Avvia StrumentalMente.
+`yarn-install`::
+  Installa yarn.
+`install`::
+  Installa le dipendenze del progetto (con l'opzione `–force` che forza
+  l'eventuale reinstallazione).
+`start`::
+  Avvia StrumentalMente.
+`deploy`::
+  Compila StrumentalMente in un eseguibile per la piattaforma su cui il
+  comando è stato eseguito.
+`docs`::
+  Ricompila tutta la documentazione partendo dai sorgenti LaTeX.
+`jsdoc`::
+  Ricompila la documentazione del codice in un file LaTeX.
+`bib2html`::
+  Converte la bibliografia in formato BibTeX in HTML e la importa
+  automaticamente nell'apposita sezione della pagina "about".
+`docx-to-html`::
+  Converte i file DOCX in file HTML.
+
+[[documentazione-del-codice-1]]
+== Documentazione del codice
+
+La presente documentazione è stata generata in modo semi-automatico da
+_JSDoc_, _JSDoc to Markdown_ e _Pandoc_.
+
+=== Classes
+
+link:#Main[Main]
+
+=== Funzioni
+
+link:#openMobileNavigation[openMobileNavigation()]::
+  Apre la navbar in modalità "`mobile`". Questa funzione è mantenuta solo
+  per consentire un eventuale eccessivo ridimensionamento della
+  finestra.
+link:#setLinks[setLinks(firstSlideNumber, links)]::
+  Cambia i link e i nomi dell'argomento precedente e quello successivo a
+  quello attuale
+link:#updateBlindAudio[updateBlindAudio(newSource)]::
+  Aggiorna la sorgente dell'audio per ciechi in base alla sezione
+  corrente. Il comportamento che segue è il seguente (descritto in pseudocodice):
++
+____
+  *if* è_in_pausa *AND* cambia_slide *then* +
+  pausa() +
+  *elseif* è_in_play *AND* cambia_slide *then* +
+  play() +
+  *elseif* è_finito *AND* non_stoppato *AND* cambia_slide *then* +
+  play() +
+  *elseif* cambia_argomento *then* +
+  pausa()
+____
+link:#initialize[initialize(initial, base, totalNumberOfSlides)]::
+  Funzione che, al caricamento della pagina, si occupa di impostare il
+  numero di tag section presenti all'interno della pagina nella memoria
+  locale del browser, di impostare come sezione visibile corrente la
+  prima (sempre all'interno della memoria locale) e di nascondere tutti
+  i tag section successivi al primo.
+link:#changeTopic[changeTopic(topicName, [base])]::
+  Cambia l'argomento correntemente mostrato.
+link:#initializeQuiz[initializeQuiz()]::
+  Inizializza la pagina del quiz.
+link:#changeQuizSlide[changeQuizSlide(finalSlide)]::
+  Cambia la slide del quiz attualmente mostrata.
+link:#playStopAudio[playStopAudio(audioTagId, buttonRef,
+stopButtonId)]::
+  Permette di avviare, mettere in pausa o stoppare un audio.
+link:#openModal[openModal(content, [options], [windowIcon])]::
+  Apre una finestra modale mostrante il contenuto richiesto.
+link:#showQuizDialog[showQuizDialog(nomeQuiz, score, total,
+return_link)]::
+  Mostra il dialogo con il punteggio dei quiz.
+link:#showExitFromQuizDialog[showExitFromQuizDialog(toOpen)]::
+  Mostra il dialogo di richiesta di conferma di uscita dal quiz.
+link:#showExitDialog[showExitDialog()]::
+  Mostra il dialogo di richiesta di conferma di uscita.
+link:#warnIfIncomplete[warnIfIncomplete(previousQuizId,
+previousQuizName, topicToOpenName, callback)]::
+  Mostra un messaggio all'utente se il quiz propedeutico all'argomento
+  scelto non è stato completato. Se l'utente conferma di voler
+  proseguire, viene effettuata l'azione richiesta, altrimenti non si
+  attua alcuna azione.
+link:#setUpTitleBar[setUpTitleBar()]::
+  Gestisce gli eventi della titlebar.
+  +
+  Questa funzione gestisce gli eventi (riduci a icona,
+  massimizza/minimizza, chiudi) che sono acessibili tramite la titlebar.
+link:#openInBrowser[openInBrowser(link)]::
+  Apre un link nel browser predefinito.
+link:#getUsername[getUsername()]::
+  Ritorna l'username collegato a StrumentalMente.
+link:#setUsername[setUsername(newUsername)]::
+  Imposta l'username dell'utente.
+link:#getQuiz[getQuiz(id)]::
+  Ottiene il risultato del quiz scelto
+link:#generateRandomQuestions[generateRandomQuestions()]::
+  La funzione genera una permutazione casuale dei numeri naturali
+  nell'intervallo [0,3]. Ogni numero è utilizzato per indicizzare il
+  vettore delle risposte (di ogni domanda), quindi la permutazione
+  corrisponde alla permutazione delle risposte a ogni domanda.
+link:#quizLoad[quizLoad(id)]::
+  Funzione di caricamento dei quiz che inizializza il punteggio
+  dell'utente, il punteggio massimo del quiz e richiama la funzione
+  inizializeQuiz. In caso di quiz che riguardano gli accordi, richiama
+  la funzione di caricamento degli stessi.
+link:#quizVerify[quizVerify(return_link)]::
+  Richiama la funzione di Check delle risposte inoltre, se si tratta di
+  un quiz che riguarda gli accordi, richiama anche la funzione
+  verify_and_store(). Infine, visualizza la finestra di dialogo che
+  mostra il punteggio ottenuto dall'utente su quello massimo del quiz e
+  richiede se uscire dal quiz o verificare le risposte date.
+link:#quizCompare[quizCompare()]::
+  Mostra gli eventuali errori commessi dall'utente mostrando le risposte
+  corrette e le eventuali risposte sbagliate. Nel caso di un quiz sugli
+  accordi, mostra l'accordo corretto al fianco di quello errato.
+link:#script_load-2[script_load()]::
+  Seleziona un numero casuale compreso tra 1 e 24 e ne sceglie il
+  relativo accordo dall'array degli accordi, lo imposta come domanda nel
+  quiz e lo inserisce in un altro array che contiene gli accordi
+  "`pescati`", ripetendo il procedimento per le 5 domande totali richieste
+  nel quiz.
+link:#verify_and_store-2[verify_and_store()]::
+  Verifica che le selezioni effettuate dall'utente siano corrette in
+  base all'accordo presentatogli e memorizza in un array se la selezione
+  è corretta (1) o non corretta (0), disabilita le checkbox analizzate e
+  aumenta il punteggio (in caso di accordo corretto).
+link:#correct_chord-2[correct_chord()]::
+  In base al numero di accordo che l'utente doveva riprodurre,
+  ripristina la sequenza di selezioni corretta negli schemi e ne blocca
+  le modifiche.
+link:#script_load-2[script_load()]::
+  Seleziona un numero casuale compreso tra 1 e 24 e ne sceglie il
+  relativo accordo dall'array degli accordi, lo imposta come domanda nel
+  quiz e lo inserisce in un altro array che contiene gli accordi
+  "`pescati`", ripetendo il procedimento per le 5 domande totali richieste
+  nel quiz.
+link:#verify_and_store-2[verify_and_store()]::
+  Verifica che le selezioni effettuate dall'utente siano corrette in
+  base all'accordo presentatogli e memorizza in un array se la selezione
+  è corretta (1) o non corretta (0), disabilita le checkbox analizzate e
+  aumenta il punteggio (in caso di accordo corretto).
+link:#correct_chord-2[correct_chord()]::
+  In base al numero di accordo che l'utente doveva riprodurre,
+  ripristina la sequenza di selezioni corretta negli schemi e ne blocca
+  le modifiche.
+link:#script_load-2[script_load()]::
+  Seleziona un numero casuale compreso tra 1 e 24 e ne sceglie il
+  relativo accordo dall'array degli accordi, lo imposta come domanda nel
+  quiz e lo inserisce in un altro array che contiene gli accordi
+  "`pescati`", ripetendo il procedimento per le 5 domande totali richieste
+  nel quiz.
+link:#verify_and_store-2[verify_and_store()]::
+  Verifica che le selezioni effettuate dall'utente siano corrette in
+  base all'accordo presentatogli e memorizza in un array se la selezione
+  è corretta (1) o non corretta (0), disabilita le checkbox analizzate e
+  aumenta il punteggio (in caso di accordo corretto).
+link:#correct_chord-2[correct_chord()]::
+  In base al numero di accordo che l'utente doveva riprodurre,
+  ripristina la sequenza di selezioni corretta negli schemi e ne blocca
+  le modifiche.
+link:#selectFirstColumn[selectFirstColumn(j)]::
+  Seleziona (o deseleziona) tutte le checkbox della prima colonna
+  nell'accordo j-esimo (passato come parametro) in base al valore della
+  prima checkbox dell'accordo j-esimo, ovvero: se il valore della prima
+  checkbox è true (selezionato) deseleziona tutta la colonna, se è false
+  la seleziona.
+link:#controlFirstColumn[controlFirstColumn(j)]::
+  Modifica il nome del bottone che permette all'utente di applicare o
+  rimuovere il barrè nei quiz in modo da renderlo coerente con lo stato
+  delle checkbox.
+
+==== Main
+
+*Kind*: global class +
+
+===== new Main()
+
+La classe contenente la logica principale dell'applicazione.
+
+==== openMobileNavigation()
+
+Apre la navbar in modalità "`mobile`". Questa funzione è mantenuta solo
+perconsentire un eventuale eccessivo ridimensionamento della finestra.
+
+*Kind*: global function +
+[#setLinks .anchor]##
+
+==== setLinks(firstSlideNumber, links)
+
+Cambia i link e i nomi dell'argomento precedente e quello successivo a
+quelloattuale
+
+*Kind*: global function
+
+[cols=",,",options="header",]
+|===
+|Param |Type |Description
+|firstSlideNumber |`number` |Il numero della prima slide dell'argomento
+corrente
+
+|links |`Object` |Le nuove impostazioni e link
+
+|links.previous |`String` |Il nome della pagina precedente
+
+|links.previousLink |`String` |Il link della pagina precedente (il nome
+del file _senza_ l'estensione)
+
+|links.next |`String` |Il nome della pagina successiva
+
+|links.nextLink |`String` |Il link della pagina successiva (il nome del
+file _senza_ l'estensione)
+|===
+
+[#updateBlindAudio .anchor]##
+
+==== updateBlindAudio(newSource)
+
+Aggiorna la sorgente dell'audio per ciechi in base alla sezione
+corrente.Il comportamento che segue è il seguente (descritto in
+pseudocodice):if è_in_pausa AND cambia_slide then pausa() elseif
+è_in_play AND cambia_slidethen play() elseif è_finito AND non_stoppato
+AND cambia_slide then play()elseif cambia_argomento then pausa()
+
+*Kind*: global function
+
+[cols=",,",options="header",]
+|===
+|Param |Type |Description
+|newSource |`String` |La nuova sorgente per l'audio
+|===
+
+[#initialize .anchor]##
+
+==== initialize(initial, base, totalNumberOfSlides)
+
+Funzione che, al caricamento della pagina, si occupa di impostare il
+numerodi tag section presenti all'interno della pagina nella memoria
+locale delbrowser, di impostare come sezione visibile corrente la prima
+(sempreall'interno della memoria locale) e di nascondere tutti i tag
+sectionsuccessivi al primo.
+
+*Kind*: global function
+
+[cols=",,,",options="header",]
+|===
+|Param |Type |Default |Description
+|initial |`String` | |Il primo argomento
+
+|base |`String` |`./` |La cartella in cui sono situati i file degli
+argomenti (default: `.``/`)
+
+|totalNumberOfSlides |`number` | |Il numero totale di pagine per la
+sezione.
+|===
+
+===== initialize~changeSlide(slide)
+
+La funzione, in base al valore assunto da slide cambia la sezione
+corrente in quella richiesta. Inoltre, si occupa di aggiornare il numero
+della slide corrente nella memoria temporanea del browser. Inoltre, in
+base al numero di slide, si occupa di rendere visibili (o nascondere) i
+relativi pulsanti di spostamento (avanti con id next, indietro con id
+back e quiz con id quiz).
+
+*Kind*: inner method of link:#initialize[initialize]
+
+[cols=",,",options="header",]
+|===
+|Param |Type |Description
+|slide |`numer` |Il numero della slide da aprire.
+|===
+
+[#changeTopic .anchor]##
+
+==== changeTopic(topicName, [base])
+
+Cambia l'argomento correntemente mostrato.
+
+*Kind*: global function
+
+[cols=",,,",options="header",]
+|===
+|Param |Type |Default |Description
+|topicName |`String` | |Il prossimo argomento
+
+|[base] |`String` |`./` |La cartella in cui è situato il file
+dell'argomento
+|===
+
+==== initializeQuiz()
+
+Inizializza la pagina del quiz.
+
+*Kind*: global function +
+[#changeQuizSlide .anchor]##
+
+==== changeQuizSlide(finalSlide)
+
+Cambia la slide del quiz attualmente mostrata.
+
+*Kind*: global function
+
+[cols=",,",options="header",]
+|===
+|Param |Type |Description
+|finalSlide |`number` |La slide da aprire in seguito alla richiesta di
+variazione della slide. Tale valore deve essere compreso nell'intervallo
+`[0, n]`, dove `n` è il numero di slide presenti nella pagina.
+|===
+
+[#playStopAudio .anchor]##
+
+==== playStopAudio(audioTagId, buttonRef, stopButtonId)
+
+Permette di avviare, mettere in pausa o stoppare un audio.
+
+*Kind*: global function
+
+[cols=",,",options="header",]
+|===
+|Param |Type |Description
+|audioTagId |`String` |L'ID dell'elemento `<audio>` da controllare
+
+|buttonRef |`HTMLElement` |Un riferimento al bottone che richiama questa
+funzione
+
+|stopButtonId |`String` |L'ID del bottone di Stop.
+|===
+
+[#openModal .anchor]##
+
+==== openModal(content, [options], [windowIcon])
+
+Apre una finestra modale mostrante il contenuto richiesto.
+
+*Kind*: global function
+
+[cols=",,,",options="header",]
+|===
+|Param |Type |Default |Description
+|content |`String` | |Il link (assoluto o relativo) da aprire
+
+|[options] |`Object` | |Le opzioni della nuova finestra
+
+|[windowIcon] |`String` |`./assets/icon.ico` |L'icona della finestra
+modale
+|===
+
+[#showQuizDialog .anchor]##
+
+==== showQuizDialog(nomeQuiz, score, total, return_link)
+
+Mostra il dialogo con il punteggio dei quiz.
+
+*Kind*: global function
+
+[cols=",,",options="header",]
+|===
+|Param |Type |Description
+|nomeQuiz |`String` |Il nome del quiz.
+
+|score |`number` |Il punteggio ottenuto.
+
+|total |`number` |Il punteggio totale possibile.
+
+|return_link |`String` |Il file da aprire se è cliccato il tasto ‘Ok'.
+Il percorso è relativo rispetto alla cartella principale.
+|===
+
+[#showExitFromQuizDialog .anchor]##
+
+==== showExitFromQuizDialog(toOpen)
+
+Mostra il dialogo di richiesta di conferma di uscita dal quiz.
+
+*Kind*: global function
+
+[cols=",,",options="header",]
+|===
+|Param |Type |Description
+|toOpen |`String` |Il file da aprire se è cliccato il tasto ‘Sì'. Il
+percorso è relativo rispetto alla cartella principale.
+|===
+
+==== showExitDialog()
+
+Mostra il dialogo di richiesta di conferma di uscita.
+
+*Kind*: global function +
+[#warnIfIncomplete .anchor]##
+
+==== warnIfIncomplete(previousQuizId, previousQuizName, topicToOpenName, callback)
+
+Mostra un messaggio all'utente se il quiz propedeutico all'argomento
+sceltonon è stato completato. Se l'utente conferma di voler proseguire,
+vieneeffettuata l'azione richiesta, altrimenti non si attua alcuna
+azione.
+
+*Kind*: global function
+
+[cols=",,",options="header",]
+|===
+|Param |Type |Description
+|previousQuizId |`String` |L'id del quiz propedeutico
+
+|previousQuizName |`String` |Il nome del quiz (da comunicare all'utente)
+
+|topicToOpenName |`String` |Il nome dell'argomento che si vuole aprire
+
+|callback |`*` |La funzione da eseguire se l'utente accetta di
+proseguire.
+|===
+
+==== setUpTitleBar()
+
+Gestisce gli eventi della titlebar.Questa funzione gestisce gli eventi
+(riduci a icona, massimizza/minimizza,chiudi) che sono acessibili
+tramite la titlebar.
+
+*Kind*: global function
+
+* link:#setUpTitleBar[setUpTitleBar()]
+** link:#setUpTitleBar..init[~init()]
+** link:#setUpTitleBar..toggleMaxRestoreButtons[~toggleMaxRestoreButtons()]
+
+[#setUpTitleBar..init .anchor]##
+
+===== setUpTitleBar~init()
+
+Inizializza la titlebar.
+
+*Kind*: inner method of link:#setUpTitleBar[setUpTitleBar] +
+[#setUpTitleBar..toggleMaxRestoreButtons .anchor]##
+
+===== setUpTitleBar~toggleMaxRestoreButtons()
+
+Cicla tra i bottoni di massimizzazione e diminimizzazione della finestra
+alternativamente
+
+*Kind*: inner method of link:#setUpTitleBar[setUpTitleBar] +
+[#openInBrowser .anchor]##
+
+==== openInBrowser(link)
+
+Apre un link nel browser predefinito.
+
+*Kind*: global function
+
+[cols=",,",options="header",]
+|===
+|Param |Type |Description
+|link |`String` |Il link da aprire
+|===
+
+==== getUsername()
+
+Ritorna l'username collegato a StrumentalMente.
+
+*Kind*: global function +
+[#setUsername .anchor]##
+
+==== setUsername(newUsername)
+
+Imposta l'username dell'utente.
+
+*Kind*: global function
+
+[cols=",,",options="header",]
+|===
+|Param |Type |Description
+|newUsername |`String` |Il nuovo username.
+|===
+
+[#getQuiz .anchor]##
+
+==== getQuiz(id)
+
+Ottiene il risultato del quiz scelto
+
+*Kind*: global function
+
+[cols=",,",options="header",]
+|===
+|Param |Type |Description
+|id |`String` |L'id del quiz di cui interessa il risultato.
+|===
+
+==== generateRandomQuestions()
+
+La funzione genera una permutazione casuale dei numeri naturali
+nell'intervallo [0,3]. Ogni numero è utilizzato per indicizzare il
+vettore delle risposte (di ogni domanda), quindi la permutazione
+corrisponde alla permutazione delle risposte a ogni domanda.
+
+*Kind*: global function +
+[#quizLoad .anchor]##
+
+==== quizLoad(id)
+
+Funzione di caricamento dei quiz che inizializza il punteggio
+dell'utente, il punteggio massimo del quiz e richiama la funzione
+inizializeQuiz. In caso di quiz che riguardano gli accordi, richiama la
+funzione di caricamento degli stessi.
+
+*Kind*: global function
+
+[cols=",,",options="header",]
+|===
+|Param |Type |Description
+|id |`String` |Indica quale quiz si sta svolgendo per permettere al
+programma di memorizzarne l'esito.
+|===
+
+[#quizVerify .anchor]##
+
+==== quizVerify(fail_return_link, success_return_link)
+
+Richiama la funzione di Check delle risposte inoltre, se si tratta di un
+quiz che riguarda gli accordi, richiama anche la funzione
+verify_and_store(). Infine, visualizza la finestra di dialogo che mostra
+il punteggio ottenuto dall'utente su quello massimo del quiz e richiede
+se uscire dal quiz o verificare le risposte date.
+
+*Kind*: global function
+
+[cols=",,",options="header",]
+|===
+|Param |Type |Description
+|fail_return_link |`String` |Indica in quale pagina si deve ritornare al
+completamento dei quiz se non lo si è superato.
+
+|success_return_link |`String` |Indica in quale pagina si deve ritornare
+al completamento dei quiz se lo si è superato.
+|===
+
+==== quizCompare()
+
+Mostra gli eventuali errori commessi dall'utente mostrando le risposte
+corrette e le eventuali risposte sbagliate. Nel caso di un quiz sugli
+accordi, mostra l'accordo corretto al fianco di quello errato.
+
+*Kind*: global function
+
+==== quizSelectNextPage(failedPage, passedPage)
+
+Apre una pagina basandosi sul risultato del quiz in cui la presente
+funzione viene richiamata.
+
+*Kind*: global function
+
+[cols=",,",options="header",]
+|===
+|Param |Type |Description
+|failedPage |`String` |La pagina da aprire se il quiz non è stato
+superato
+
+|passedPage |`String` |La pagina da aprire se il quiz è stato superato
+|===
+
+==== script_load()
+
+Seleziona un numero casuale compreso tra 1 e 24 e ne sceglie il relativo
+accordo dall'array degli accordi, lo imposta come domanda nel quiz e lo
+inserisce in un altro array che contiene gli accordi "`pescati`",
+ripetendo il procedimento per le 5 domande totali richieste nel quiz.
+
+*Kind*: global function
+
+==== verify_and_store()
+
+Verifica che le selezioni effettuate dall'utente siano corrette in base
+all'accordo presentatogli e memorizza in un array se la selezione è
+corretta (1) o non corretta (0), disabilita le checkbox analizzate e
+aumenta il punteggio (in caso di accordo corretto).
+
+*Kind*: global function
+
+==== correct_chord()
+
+In base al numero di accordo che l'utente doveva riprodurre, ripristina
+la sequenza di selezioni corretta negli schemi e ne blocca le modifiche.
+
+*Kind*: global function
+
+==== script_load()
+
+Seleziona un numero casuale compreso tra 1 e 24 e ne sceglie il relativo
+accordo dall'array degli accordi, lo imposta come domanda nel quiz e lo
+inserisce in un altro array che contiene gli accordi "`pescati`",
+ripetendo il procedimento per le 5 domande totali richieste nel quiz.
+
+*Kind*: global function
+
+==== verify_and_store()
+
+Verifica che le selezioni effettuate dall'utente siano corrette in base
+all'accordo presentatogli e memorizza in un array se la selezione è
+corretta (1) o non corretta (0), disabilita le checkbox analizzate e
+aumenta il punteggio (in caso di accordo corretto).
+
+*Kind*: global function
+
+==== correct_chord()
+
+In base al numero di accordo che l'utente doveva riprodurre, ripristina
+la sequenza di selezioni corretta negli schemi e ne blocca le modifiche.
+
+*Kind*: global function +
+[#script_load-2 .anchor]##
+
+[[script_load-3]]
+==== script_load()
+
+Seleziona un numero casuale compreso tra 1 e 24 e ne sceglie il relativo
+accordo dall'array degli accordi, lo imposta come domanda nel quiz e lo
+inserisce in un altro array che contiene gli accordi "`pescati`",
+ripetendo il procedimento per le 5 domande totali richieste nel quiz.
+
+*Kind*: global function +
+[#verify_and_store-2 .anchor]##
+
+[[verify_and_store-3]]
+==== verify_and_store()
+
+Verifica che le selezioni effettuate dall'utente siano corrette in base
+all'accordo presentatogli e memorizza in un array se la selezione è
+corretta (1) o non corretta (0), disabilita le checkbox analizzate e
+aumenta il punteggio (in caso di accordo corretto).
+
+*Kind*: global function +
+[#correct_chord-2 .anchor]##
+
+[[correct_chord-3]]
+==== correct_chord()
+
+In base al numero di accordo che l'utente doveva riprodurre, ripristina
+la sequenza di selezioni corretta negli schemi e ne blocca le modifiche.
+
+*Kind*: global function +
+[#selectFirstColumn .anchor]##
+
+==== selectFirstColumn(j)
+
+Seleziona (o deseleziona) tutte le checkbox della prima colonna
+nell'accordo j-esimo (passato come parametro) in base al valore della
+prima checkbox dell'accordo j-esimo, ovvero: se il valore della prima
+checkbox è true (selezionato) deseleziona tutta la colonna, se è false
+la seleziona.
+
+*Kind*: global function
+
+[cols=",,",options="header",]
+|===
+|Param |Type |Description
+|j |`number` |Indica il numero di slide su cui la funzione deve operare.
+|===
+
+[#controlFirstColumn .anchor]##
+
+==== controlFirstColumn(j)
+
+Modifica il nome del bottone che permette all'utente di applicare o
+rimuovere il barrè nei quiz in modo da renderlo coerente con lo stato
+delle checkbox.
+
+*Kind*: global function
+
+[cols=",,",options="header",]
+|===
+|Param |Type |Description
+|j |`number` |Indica il numero di slide su cui la funzione deve operare.
+|===

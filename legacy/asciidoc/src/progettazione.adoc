@@ -1,0 +1,569 @@
+= Documento di Progettazione
+
+== Introduzione
+
+L'_hypermedia_ ha l'obiettivo di avvicinare gli utenti al mondo della
+musica e di aiutarli a migliorare le loro conoscenze riguardanti questa
+arte.
+
+=== I concetti
+
+L'applicazione conterrà i seguenti concetti:
+
+* Concetti teorici
+* Strumenti
+* Accordi
+* Quiz
+
+L'applicazione è quindi divisa in sezioni (tante quante i singoli
+concetti). Tali sezioni sono ulteriormente divise in "`unità`" all'interno
+delle quali ogni argomento sarà presentato attraverso una combinazione
+di testo, immagini, video e audio.
+
+L'applicazione avrà una pagina iniziale che ha lo scopo di introdurre il
+concetto di "`musica`", nonché di presentare all'utente delle istruzioni
+basilari sull'uso del sistema.
+
+sarà introdotto da una semplice _splash screen_ che permetterà
+all'utente di accedere più gradualmente all'applicazione. Si
+accompagnerà il tutto con un manuale utente.
+
+Il sistema conterrà una sezione per ogni unità che possa permettere
+all'utente di mettersi alla prova tramite domande a risposta multipla o
+"`minigiochi`".
+
+==== Definizione dei concetti
+
+===== Concetti teorici
+
+I concetti teorici sono alla base dell'interfaccia con il mondo della
+musica. Sono suddivisi in due unità (più propriamente dette "`livelli`"):
+_teoria di livello base_ e _teoria di livello intermedio/avanzato_ in
+cui, rispettivamente, saranno presentati i concetti necessari alla
+comprensione dei contenuti e saranno presentati dei concetti di
+approfondimento. Gli argomenti saranno trattati in modo da essere
+facilmente comprensibili dagli utenti che non hanno conoscenze in questo
+campo.
+
+==== Strumenti
+
+Come tutte le arti, la musica necessita di una grande abilità pratica.
+Tramite le varie unità (che si identificano con gli strumenti presenti
+nell'applicazione, ovverosia: batteria, basso, chitarra e pianoforte) in
+cui è diviso questo concetto l'utente può interfacciarsi sulle tecniche
+base, intermedie e avanzate dello strumento scelto.
+
+==== Accordi
+
+Una parte degli strumenti prevede la possibilità di suonare degli
+accordi. Nelle varie unità (che, anche in questo caso, si identificano
+con gli strumenti) di questo concetto, l'utente potrà imparare a suonare
+degli accordi con il proprio strumento.
+
+==== Quiz
+
+Per ogni unità dei concetti precedentemente definiti, sarà presente
+un'unità di _test_ che consentirà all'utente di verificare le proprie
+conoscenze. Non è necessario superare un test per procedere
+nell'utilizzo dell'applicazione, ma è consigliato.
+
+=== I task
+
+* Conoscere la teoria che c'è dietro l'arte della musica
+* Conoscere le tecniche basilari di almeno uno strumento
+
+// TODO: INSERT DIAGRAM
+
+== Progettazione
+
+=== Il modello RMM
+
+Nella progettazione del sistema si sono individuate quattro entità
+differenti:
+
+Concetto teorico::
+Classe dei concetti musicali prettamente teorici, necessari a una giusta
+comprensione del mondo musicale. Sono caratterizzati da un titolo (che
+li identifica) e una descrizione (la quale è ciò che interessa
+all'utente).
+
+Strumento::
+Classe degli strumenti musicali. Sono caratterizzati da un nome (che li
+identifica) e tutte le informazioni annesse (tra cui una descrizione
+della struttura dello strumento e le tecniche più comuni).
+
+Accordo / Tecnica::
+Classe degli accordi musicali, identificati da un nome, contenenti una
+descrizione (in termini di note musicali) e degli esempi utili agli
+utenti. Poiché alcuni strumenti _non_ sono polifonici (e non sono quindi
+in grado di produrre accordi) sono considerate appartenenti a questa
+classe di oggetti anche le tecniche di utilizzo più avanzate dei
+suddetti strumenti.
+
+Quiz::
+Classe di oggetti che consentono all'utente di ripetere un argomento.
+Contengono un numero identificativo, una domanda e fino a quattro
+risposte differenti. Fanno parte di questa classe anche le domande
+interattive, ovverosia quelle che richiedono all'utente di _"`costruire`"_
+una risposta (si considerano aventi una sola risposta possibile).
+
+==== Il modello ER
+
+image:media/image84.png[image,width=581,height=278]
+
+==== Progettazione delle slice
+
+Si sono progettate le _slice_ riferite alle quattro entità
+precedentemente introdotte.
+
+Nei seguenti schemi è indicato con un asterisco (``*``) la
+slice iniziale. Inoltre, sono indicate con delle frecce continue i link
+che permettono lo spostamento tra le varie slice della stessa entità (su
+tale freccia è posto il significato del link).
+
+Si noti che nella progettazione delle slice dell'entità _ACCORDO_ non si
+è inserita alcuna informazione in riferimento alla slice _esempio_:
+questo poiché la tipologia di esempio e i _media_ utilizzati possono
+variare da strumento a strumento.
+
+Non è visibile né nei seguenti schemi né nella progettazione del modello
+della navigazione la possibilità di suddividere le slice in varie
+"`schermate`" (a seconda della disponibilità di spazion in relazione ai
+contenuti), tuttavia si tiene a precisare che è prevista la suddivisione
+dei contenuti di una stessa slice in più schermate.
+
+// TODO: FIX
+[cols=",",options="header",]
+|===
+a|
+image:media/image88.png[image,width=178,height=460]
+
+_a) Slice dell'entità 'Strumento'_
+
+a|
+image:media/image89.png[image,width=357,height=378]
+
+_b) Slice dell'entità 'Accordo'_
+
+a|
+image:media/image90.png[image,width=227,height=245]
+
+_c) Slice dell'entità 'Quiz'_
+
+a|
+image:media/image91.png[image,width=228,height=245]
+
+_d) Slice dell'entità 'Concetto teorico'_
+
+|===
+
+_Figura 2.2. Le slice del modello RMM di StrumentalMente_
+
+=== Modello della navigazione
+
+image:media/image92.png[image,width=600,height=364]
+
+_Figure 2.1. Il modello della navigazione di StrumentalMente_
+
+=== I flowchart
+
+Nelle pagine seguenti si riportano i _flowchart_ rappresentanti le
+possibilità di navigazione all'interno di StrumentalMente. Per
+alleggerire la visualizzazione, non si riportano delle didascalie per
+ogni flowchart: la sezione a cui si riferiscono è riportata all'inizio
+della sequenza (fatta eccezione per il flowchart della _home page_ del
+sistema, che è il primo presentato).
+
+NOTE: Per motivi legati meramente alla dimensione delle pagine del
+presente documento, alcuni flowchart sono disposti orizzontalmente.
+Inoltre, i flowchart non sono strutturati e non sono deterministici in
+quanto rappresentano tutte{blank}footnote:[Non sono effettivamente
+rappresentate _tutte_ le possibili strade in quanto l'applicazione è
+progettata in modo che (quasi) tutte le pagine siano raggiungibili da
+qualunque altra parte del sistema: sono rappresentate solo le strade che
+l'utente percorrerebbe se avesse pianificato un percorso da percorrere.]
+le possibili strade che l'utente può percorrere all'interno
+dell'applicazione.
+
+image:media/image40.png[image,width=600,height=438]
+
+image:media/image73.png[image,width=456,height=878]
+
+image:media/image86.png[image,width=600,height=394]
+
+image:media/image1.png[image,width=599,height=506]
+
+image:media/image48.png[image,width=599,height=770]
+
+image:media/image51.png[image,width=599,height=942]
+
+image:media/image63.png[image,width=600,height=815]
+
+image:media/image49.png[image,width=600,height=814]
+
+image:media/image45.png[image,width=311,height=1012]
+
+image:media/image42.png[image,width=314,height=1021]
+
+image:media/image4.png[image,width=315,height=1026]
+
+image:media/image87.png[image,width=264,height=732]
+
+=== Scelte progettuali
+
+L'applicazione si basa sulla sequenzialità delle macroaree secondo il
+seguente flowchart:
+
+_Figura 2.3. Flowchart rappresentate la sequenza "standard" della
+navigazione all'interno di StrumentalMente_
+//TODO: ADD FIGURE
+
+Per rafforzare questo concetto, all'interno del sistema _non_ saranno
+previsti collegamenti esterni fra le diverse macroaree e queste
+prevedono come *propedeuticità* il completamento (e superamento) del
+quiz della macroarea precedente. Ovviamente, però, l'utente deve restare
+libero di scegliere un proprio percorso alternativo, per questo motivo
+(nonostante si trovi già in una sezione dell'applicazione) deve avere la
+possibilità di muoversi liberamente per tutto il sistema..
+
+== Design
+
+=== I colori
+
+Come stabilito in fase di pianificazione, l'applicazione verterà su un
+colore rosso-arancio, in quanto solitamente associato alla nota di Do.
+
+Si è, quindi, generata una _palette_ di colori partendo da un colore
+arancio scuro, simile al colore dei cachi. Si sono scelti quattro colori
+seguendo la "`regola`" della tetrade cromatica, selezionando dei colori
+con una distanza di trenta gradi circa (sulla ruota cromatica) dal
+colore principale.
+
+Si veda la <<tab-colori>> per avere dei riferimenti visivi sui colori
+scelti. Per ogni colore, sono presentate quattro tinte diverse
+(escludendo il colore "`puro`", mostrato in posizione centrale) e sono
+riportati i vari codici in esadecimale. Inoltre, è possibile osservare
+la resa sia di un testo bianco che di uno nero sulle varie tinte.
+
+[[tab-colori]]
+.Palette dei colori su cui e basato il design di StrumentalMente
+[cols="<.^2h, 5*<.^1m"]
+|===
+|Colore primario |#FF9E6B #FF9E6B |#FF8C4F #FF8C4F |#E55100 #E55100
+|#802D00 #802D00 |#571E00 #571E00
+|Colore secondario (1) |#FFC56B #FFC56B |#FFB94F #FFB94F |#E58B00
+#E58B00 |#804D00 #804D00 |#573500 #573500
+
+|Colore complementare |#6FABEF #6FABEF |#4D8DD5 #4D8DD5 |#0C4D95 #0C4D95
+|#012853 #012853 |#001B39 #001B39
+
+|Colore secondario (2) |#64EFC5 #64EFC5 |#42D6A9 #42D6A9 |#00976A
+#00976A |#00543B #00543B |#003928 #003928
+|===
+
+Ai precedenti colori, vanno poi aggiunti i colori bianco (_#FFFFFF_),
+nero (_#000000_) e grigio all'80% (_#333333_), utilizzati per
+contrastare i colori più accesi e per il testo dell'applicazione.
+
+=== Le gabbie logiche
+
+Come fase preliminare al design dell'applicazione vera e propria, il
+team ha condotto una fase di _brainstorming_ che aveva come obiettivo la
+definizione delle varie sezioni (grafiche) dell'applicazione. Frutto di
+tale processo sono le seguenti gabbie logiche, che definiscono la
+struttura basilare che è stata scelta per l'applicazione.
+
+[cols="",options="header",]
+|===
+a|
+_Figura 3.1. Le gabbie logiche di StrumentalMente_
+
+image:media/image85.png[image,width=541,height=325]
+
+_a) La landing page_
+
+a|
+image:media/image5.png[image,width=541,height=325]
+
+_b) La home page_
+
+a|
+image:media/image6.png[image,width=560,height=336]
+
+_c) La struttura delle pagine dei contenuti_
+
+a|
+image:media/image35.png[image,width=560,height=336]
+
+_d) La pagina (pop-up) di aiuto, di bibliografia e altro_
+
+a|
+image:media/image36.png[image,width=544,height=326]
+
+_e) Una pagina del quiz_
+
+a|
+image:media/image38.png[image,width=544,height=326]
+
+_f) La pagina (pop-up) dei risultati del quiz_
+
+a|
+image:media/image39.png[image,width=541,height=325]
+
+_g) Una pagina di controllo del quiz_
+
+|===
+
+=== Le icone
+
+Come prestabilito, l'applicazione deve avere un _look_ moderno e
+accattivante. A tale scopo si è scelto di seguire alcune linee guida
+dettate dal _Material Design_ di _Google_. A tal fine, si è scelto di
+utilizzare delle icone semplici simili, per l'appunto, a quelle che
+_Google_ consiglia per creare applicazioni in _Material Design_.
+
+Con uno sguardo teso alla fase di realizzazione del sistema, si sceglie
+di utilizzare le icone fornite dal _font_ https://fontawesome.com[__Font
+Awesome__],
+in quanto sono disponibili (gratuitamente) diverse icone che rispettano
+gli standard imposti per la creazione di StrumentalMente.
+
+== I contenuti
+
+=== Bibliografia
+
+In questa sezione è contenuta tutta la bibliografia e la sitografia
+utilizzata per stendere i contenuti di StrumentalMente.
+
+=== Istruttori ed esperti
+
+Gli istruttori ed esperti dell'Accademia musicale _Francisco Tàrrega_
+sono:
+
+* Andrea *Manco*, istruttore teorico
+* William *Marino*, istruttore di basso
+* Giovanni *Pagliaro*, istruttore di chitarra
+* Marcello *Nisi*, istruttore di batteria
+* Marco *Amati*, istruttore di pianoforte
+
+[bibliography]
+==== Riferimenti
+
+. *Wikiversità.* Scale pentatoniche (chitarra) — Wikiversità,.  [Online] https://it.wikiversity.org/w/index.php?title=Scale_pentatoniche_(chitarra)&oldid=187777.
+
+. *Wikipedia.* Poliritmia — Wikipedia, L'enciclopedia libera.  [Online] http://it.wikipedia.org/w/index.php?title=Poliritmia&oldid=101229885.
+
+. —. Diteggiatura — Wikipedia, L'enciclopedia libera. [Online] http://it.wikipedia.org/w/index.php?title=Diteggiatura&oldid=101227354.
+
+. —. Chitarra — Wikipedia, L'enciclopedia libera. [Online] http://it.wikipedia.org/w/index.php?title=Chitarra&oldid=102740985.
+
+. —. Accordo (musica) — Wikipedia, L'enciclopedia libera.  [Online] http://it.wikipedia.org/w/index.php?title=Accordo_(musica)&oldid=101221024.
+
+. *Wikibooks.* Chitarra/Scale modali — Wikibooks, Pensa liberamente, impara liberamente. [Online] https://it.wikibooks.org/w/index.php?title=Chitarra/Scale_modali&oldid=358254.
+
+. *Vetrano, Giuseppe.* Lezioni di chitarra: note, tasti, accordi. [Online] https://www.deabyday.tv/hobby-e-tempo-libero/divertimento/video/550/Lezioni-di-chitarra\--note\--tasti\--accordi.html.
+
+. *Toschi, Alessandro.* Il significato della musica. [Online] 3 2012.  https://alessandrotoschiblog.wordpress.com/2012/03/25/il-significato-della-musica/.
+
+. *Sintucci, Carlo.* Mano destra e mano sinistra. [Online] https://corsodichitarraclassica.wordpress.com/2012/02/04/mano-destra-e-mano-sinistra/.
+
+. —. Il Barrè. [Online] https://corsodichitarraclassica.wordpress.com/2012/02/04/il-barre/.
+
+. *Sgalambro, Gianluca.* I rudimenti del tamburo e della batteria: i 40 rudimenti fondamentali e i rudimenti ibridi. [Online] http://www.pentagrammi.it/i-rudimenti-della-batteria-i-40-rudimenti-fondamentali-e-i-rudimenti-ibridi/.
+
+. *Salerno, Christian.* La tecnica del suono legato. [Online] https://www.pianosolo.it/la-tecnica-del-suono-legato/.
+
+. *Sagreras, Julio.* _Le prime lezioni di chitarra._ s.l. : Edizioni BERBEN, 2010.
+
+. *Rossi, Luigi.* _Teoria Musicale._ s.l. : Edizioni Carrara, 1977.
+
+. *Rojatti, Gianni.* Come studiare a metronomo: tra velocità e qualità. [Online] https://www.accordo.it/article/viewPub/78758.
+
+. *Ricatti, Luca.* Scala pentatonica chitarra: tutto ciò che c'è da sapere. [Online] http://www.lucaricatti.it/scala-pentatonica/.
+
+. —. Note chitarra: trovare le note sulla tastiera. [Online] http://www.lucaricatti.it/note-chitarra/.
+
+. —. Esercizi fingerstyle. [Online] http://www.lucaricatti.it/esercizi-fingerstyle/.
+
+. —. Arpeggi sulla Chitarra: come studiarli, capirli e ricordarli. [Online] http://www.lucaricatti.it/arpeggi-sulla-chitarra/.
+
+. *Polacchi, Barbara.* Lo strumming. [Online] https://www.suonolachitarra.it/blog/strumming.html.
+
+. *Piccioli, Giuseppe.* _Didattica Pianistica._ s.l. : Edizioni Curci, 1935.
+
+. *Pantaleoni, Stefano.* _Teoria, analisi e composizione per i licei musicali._ s.l. : Liceo Attilio Bertolucci Editore, 2015. Vol. I, II e III.
+
+. *Marini, Marco.* Tecnica pianistica: articolazione delle dita. [Online] http://www.klavier.it/tecnica-pianistica5.html.
+
+. *Loiodice, Marco "`Pikkolo`".* Corso di musica per tutti...  quelli che la amano! [Online] https://www.inventati.org/rebirth/pikko_landia/corso_di_musica_by_pikkolo.pdf.
+
+. *Grondona, Giuseppe.* Indipendenza vs coordinazione. [Online] https://giuseppegrondona.wordpress.com/2011/03/29/indipendenza-vs-coordinazione/.
+
+. *Giuliani, Mauro.* _Centoventi arpeggi._ s.l. : Edizioni Suvini Zerboni, 1976.
+
+. *Galli, Claudia e Fasoli, Maurizio.* Evviva la musica! — Strumenti per una didattica inclusiva. [Online] https://www.mondadorieducation.it/media/contenuti/canali/bes/9788848259002_Evviva_la_musica_BES.pdf.
+
+. *Collaboratore, W.* Le differenze tra chitarra classica ed elettrica. [Online] https://www.lettera43.it/it/comefare/stili-di-vita/2015/08/31/le-differenze-tra-chitarra-classica-ed-elettrica/1755/.
+
+. *Cicolin, Claudio.* Chitarra fingerstyle: impostazione mano destra. [Online] https://www.lezioni-chitarra.it/article/13-blog/235-lezioni-di-chitarra-online-fingerstyle-impostazione-mano-destra.
+
+. *Cassano, Giacomo.* Teoria del giro armonico. [Online] https://www.chitarrafingerstyle.it/il-giro-armonico.html.
+
+. —. Metodi di accordatura. [Online] https://www.chitarrafingerstyle.it/metodi-di-accordatura.html.
+
+. *Casella, Alfredo.* _Il pianoforte._ s.l. : Ricordi, 1984.
+
+. *Carcassi, Matteo.* _25 studi melodici progressivi._ s.l. : Curci, 1998.
+
+. *Cagliani, Francesco.* Com'è fatto un pianoforte? [Online] https://francescocagliani.altervista.org/come-e-fatto-un-pianoforte/.
+
+. *Busonero, Stefano.* Il valore delle note e delle pause.  [Online] https://www.busonero.it/2015/04-valore-delle-note-e-pause/.
+
+. —. Accordi maggiori nella chitarra. [Online] https://www.busonero.it/2015/accordi-maggiori/.
+
+. *Bloom”, “Ralf.* Come accordare una chitarra con l'accordatore. [Online] https://nonsolocultura.studenti.it/come-accordare-una-chitarra-con-l-accordatore-161302.html.
+
+. *Anonimo.* Le caratteristiche del suono. [Online] http://eventi.centrostudicampostrini.it/media/archive/161107-1031-il_suono.pdf.
+
+. —. Classificazione degli strumenti musicali. [Online] http://www.inftub.com/generale/musica/CLASSIFICAZIONE-DEGLI-STRUMENT21545.php.
+
+. *Anesa, Maurizio.* _Bass System._ s.l. : Ricordi.
+
+. *"`Lezioni Strumenti Musicali`", Adming.* I nomi dei componenti della chitarra, analizziamo le parti. [Online] https://lezioni.strumenti-musicali.info/suonarechitarra/2012/02/i-nomi-dei-componenti-della-chitarra-analizziamo-le-parti.html.
+
+. *"`Franz”.* L'influenza del “tocco`" sul suono del pianoforte.  [Online] https://www.mancusipianoforti.it/2018/02/25/l-influenza-del-tocco-sul-suono-del-pianoforte/.
+
+. *"`Alessandro`".* Le tecniche per diventare bravi con l'arpeggio. [Online] https://www.superprof.it/blog/i-consigli-per-eseguire-un-arpeggio-al-meglio/.
+
+. *Wikipedia.* Cross-beat — Wikipedia, The Free Encyclopedia.
+
+== Definizione del piano di test
+
+.Piano di test
+[cols="^.^1,2*<.^3",options="header",]
+|===
+|Codice |Descrizione |Esito previsto
+|T00 (a) |Click del bottone "`chiudi`" della _titlebar_ |Apertura del
+dialogo di conferma di chiusura dell'applicazione
+
+|T00 (b) |Click del bottone "`riduci`" della _titlebar_ |Riduzione della
+finestra dell'applicazione, rimozione del bottone e aggiunta del bottone
+"`massimizza`"
+
+|T00 (c) |Click del bottone "`massimizza`" della _titlebar_
+|Massimizzazione della finestra dell'applicazione, rimozione del bottone
+e aggiunta del bottone "`riduci`"
+
+|T00 (d) |Click del bottone "`riduci a icona`" della _titlebar_ |Riduzione
+a icona dell'applicazione
+
+|T01 |Click del bottone "`Inizia`" |Apertura e visualizzazione della
+pagina home
+
+|T02 |Utilizzo della _shortcut_ "`_Enter_`" nella _landing page_ |Apertura
+e visualizzazione della pagina home
+
+|T03 |Click del bottone "`Home`" |Apertura e visualizzazione della pagina
+home
+
+|T04 |Click del bottone "`Profilo`" |Apertura e visualizzazione della
+pagina del profilo
+
+|T05 |Click del bottone "`Teoria Musicale`" |Apertura e visualizzazione
+dell'indice della teoria
+
+|T06 |Click del bottone "`Teoria Strumenti`" |Apertura e visualizzazione
+della lista di strumenti (per la teoria) disponibili
+
+|T07 |Click del bottone "`Accordi`" |Apertura e visualizzazione della
+lista di strumenti (per gli accordi) disponibili
+
+|T08 |Click del bottone "`Mappa`" |Apertura e visualizzazione della
+finestra pop-up della mappa
+
+|T09 |Click del bottone "`Aiuto`" |Apertura e visualizzazione della
+finestra pop-up relativo alla sezione in cui ci si trova
+
+|T10 |Click del bottone "`Informazioni`" |Apertura e visualizzazione della
+finestra pop-up di informazioni sul sistema
+
+|T11 |Click del bottone "`Esci`" |Apertura del dialogo di conferma di
+uscita dal sistema
+
+|T11.1 |Click del bottone "`Sì`" nel dialogo di conferma di uscita |Uscita
+dal sistema e chiusura di quest'ultimo
+
+|T11.2 |Click del bottone "`No`" nel dialogo di conferma di uscita
+|Chiusura del dialogo di conferma e ritorno al sistema
+
+|T12 |Click del titolo di un quiz nella pagina "`Profilo`" |Apertura del
+rispettivo quiz
+
+|T13 |Click del bottone "`Reset del profilo`" nella pagina del profilo
+|Reset dei risultati dei quiz a "`non svolti`".
+
+|T14 |Modifica dell'username nella pagina del profilo |Modifica e
+salvataggio dell'username dell'utente
+
+|T15 |Click della macroarea da visitare in un indice degli argomenti
+|Apertura del sottoindice della macroarea scelta
+
+|T16 |Click di un argomento in un indice |Apertura del relativo
+argomento
+
+|T17 |Utilizzo del bottone "`Avanti`" |Cambio della slide mostrata (o
+dell'argomento se è l'ultima slide)
+
+|T17.1 |Utilizzo del bottone "`Avanti`" nell'ultima slide nell'ultimo
+argomento di una sezione |Apertura del quiz relativo alla sezione scelta
+
+|T18 |Utilizzo del bottone "`Indietro`" |Cambio della slide mostrata (o
+dell'argomento se è l'ultima slide)
+
+|T19 |Utilizzo delle shortcut "`freccia avanti” e “freccia indietro`"
+|Simulazione del click del bottone "`Avanti” o “Indietro`"
+(rispettivamente)
+
+|T20 |Apertura di una sezione per cui si è completato il quiz
+propedeutico |Apertura della sezione scelta
+
+|T20.1 |Apertura di una sezione per cui non si è completato il quiz
+propedeutico |Apertura di un dialogo di avviso e conferma della scelta
+
+|T20.1.1 |Click del bottone "`Sì`" |Chiusura del dialogo e apertura della
+sezione
+
+|T20.1.2 |Click del bottone "`No`" |Chiusura del dialogo
+
+|T21 |Click dei bottoni di navigazione ("`X° Domanda`") nella _sidebar_
+dei quiz |Apertura della domanda scelta
+
+|T22 |Click del bottone "`Aiuto`" nei quiz |Apertura della pagina di aiuto
+relativa ai quiz
+
+|T23 |Click del bottone "`Torna alla teoria`" nei quiz |Ritorno alla home
+della sezione di teoria a cui il quiz si riferisce
+
+|T24 |Click del bottone "`Esci dall'applicazione`" nei quiz |Apertura del
+dialogo di conferma di uscita dal sistema
+
+|T25 |Click del bottone "`Avanti” o “Indietro`" nei quiz |Variazione della
+domanda mostrata con la successiva o la precedente (rispettivamente)
+
+|T25.1 |Click del bottone "`Indietro`" nella prima domanda |Simulazione
+del click del bottone "`Torna alla teoria`" (T23)
+
+|T26 |Click del bottone "`Verifica`" alla fine di un quiz |Visualizzazione
+di un messaggio contenente il risultato ottenuto
+
+|T26.1 |Click del bottone "`Ok`" |Chiusura del messaggio di dialogo e
+ritorno alla home della sezione scelta
+
+|T26.2 |Click del bottone "`Verifica`" |Apertura della correzione dei quiz
+
+|T26.2.1 |Click del bottone "`Esci`" alla fine della correzione |Ritorno
+alla home della sezione scelta
+
+|T27 |Click del bottone "`Indice`" all'interno di un argomento |Apertura
+dell'indice della relativa sezione
+|===
